@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 
-from profileapp.views import home_page
+from profileapp.views import *
 
 class HomePageTest(TestCase):
 
@@ -15,4 +15,14 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         response = home_page(request)
         expected_html = render_to_string('home.html')
+        self.assertEqual(response.content.decode(), expected_html)
+
+    def test_root_url_resolves_to_activity_view(self):
+        found = resolve('/activity/')
+        self.assertEqual(found.func, activity_page)
+
+    def test_activity_page_returns_correct_html(self):
+        request = HttpRequest()
+        response = activity_page(request)
+        expected_html = render_to_string('activity.html')
         self.assertEqual(response.content.decode(), expected_html)
