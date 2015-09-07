@@ -15,8 +15,10 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.get('http://localhost:8000')
         self.assertIn("Web Profile Faisal", self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn("Web Profile Faisal", header_text)
-
+        self.assertIn("Profile Faisal", header_text)
+        subheader_text = self.browser.find_elements_by_tag_name('h2')
+        self.assertEqual("Identitas Diri",subheader_text[0].text)
+        self.assertEqual("Kontak & Media Sosial",subheader_text[1].text)
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
