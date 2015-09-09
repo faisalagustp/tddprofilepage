@@ -20,5 +20,6 @@ from profileapp import views
 urlpatterns = [
     url(r'^$', views.home_page),
     url(r'^activity/', views.activity_page),
+    url(r'^todolist/', views.todolist_page),
     #url(r'^admin/', include(admin.site.urls)),
 ]

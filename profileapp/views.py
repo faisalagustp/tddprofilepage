@@ -6,3 +6,6 @@ def home_page(request) :
 
 def activity_page(request):
     return render(request, 'activity.html')
+
+def todolist_page(request):
+    return render(request, 'todolist.html')
