@@ -42,13 +42,37 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         request.method = 'POST'
         request.POST['item_text'] = 'A new list item'
+
         response = todolist_page(request)
-        self.assertIn('A new list item', response.content.decode())
-        expected_html = render_to_string(
-            'todolist.html',
-            {'new_item_text':  'A new list item'}
-        )
-        self.assertEqual(response.content.decode(), expected_html)
+
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, 'A new list item')
+
+    def test_todolist_page_redirect_after_POST_request(self):
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['item_text'] = 'A new list item'
+
+        response = todolist_page(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/todolist')
+
+    def test_todolist_page_only_saves_items_when_necessary(self):
+        request = HttpRequest()
+        todolist_page(request)
+        self.assertEqual(Item.objects.count(), 0)
+
+    def test_todolist_page_displays_all_list_items(self):
+        Item.objects.create(text='itemey 1')
+        Item.objects.create(text='itemey 2')
+
+        request = HttpRequest()
+        response = todolist_page(request)
+
+        self.assertIn('itemey 1', response.content.decode())
+        self.assertIn('itemey 2', response.content.decode())
 
 class ItemModelTest(TestCase):
 
