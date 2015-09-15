@@ -14,5 +14,15 @@
             <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
           {% endfor %}
         </table>
+
+        <div id="komentar">
+          {% if items.count == 0 or items == Null %}
+              yey, waktunya berlibur
+          {% elif items.count < 5 %}
+              sibuk tapi santai
+          {% else %}
+              oh tidak
+          {% endif %}
+        </div>
     </body>
 </html>

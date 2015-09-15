@@ -75,6 +75,36 @@ class HomePageTest(TestCase):
         self.assertIn('itemey 2', response.content.decode())
 
 
+    def test_todolist_page_shows_comments_no_item(self):
+        request = HttpRequest()
+        response = todolist_page(request)
+
+        self.assertIn('yey, waktunya berlibur', response.content.decode())
+
+    def test_todolist_page_shows_comments_four_item(self):
+        Item.objects.create(text='itemey 1')
+        Item.objects.create(text='itemey 2')
+        Item.objects.create(text='itemey 3')
+        Item.objects.create(text='itemey 4')
+
+        request = HttpRequest()
+        response = todolist_page(request)
+
+        self.assertIn('sibuk tapi santai', response.content.decode())
+
+    def test_todolist_page_shows_comments_five_item(self):
+        Item.objects.create(text='itemey 1')
+        Item.objects.create(text='itemey 2')
+        Item.objects.create(text='itemey 3')
+        Item.objects.create(text='itemey 4')
+        Item.objects.create(text='itemey 5')
+
+        request = HttpRequest()
+        response = todolist_page(request)
+
+        self.assertIn('oh tidak', response.content.decode())
+
+
 class ItemModelTest(TestCase):
 
     def test_saving_and_retrieving_items(self):

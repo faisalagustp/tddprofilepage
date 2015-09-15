@@ -15,4 +15,5 @@ def todolist_page(request):
         return redirect('/todolist')
 
     items = Item.objects.all()
-    return render(request, 'todolist.html', {'items': items})
+    message = "yey, waktunya berlibur"
+    return render(request, 'todolist.html', {'items': items })
