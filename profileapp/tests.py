@@ -74,36 +74,19 @@ class HomePageTest(TestCase):
         self.assertIn('itemey 1', response.content.decode())
         self.assertIn('itemey 2', response.content.decode())
 
+    def todolist_page_show_comments(self, number, message):
+        for x in range(0, number):
+            Item.objects.create(text='itemey '+str(number))
+        request = HttpRequest()
+        response = todolist_page(request)
+
+        self.assertIn(message, response.content.decode())
+
 
     def test_todolist_page_shows_comments_no_item(self):
-        request = HttpRequest()
-        response = todolist_page(request)
-
-        self.assertIn('yey, waktunya berlibur', response.content.decode())
-
-    def test_todolist_page_shows_comments_four_item(self):
-        Item.objects.create(text='itemey 1')
-        Item.objects.create(text='itemey 2')
-        Item.objects.create(text='itemey 3')
-        Item.objects.create(text='itemey 4')
-
-        request = HttpRequest()
-        response = todolist_page(request)
-
-        self.assertIn('sibuk tapi santai', response.content.decode())
-
-    def test_todolist_page_shows_comments_five_item(self):
-        Item.objects.create(text='itemey 1')
-        Item.objects.create(text='itemey 2')
-        Item.objects.create(text='itemey 3')
-        Item.objects.create(text='itemey 4')
-        Item.objects.create(text='itemey 5')
-
-        request = HttpRequest()
-        response = todolist_page(request)
-
-        self.assertIn('oh tidak', response.content.decode())
-
+        self.todolist_page_show_comments(0, "yey, waktunya berlibur")
+        self.todolist_page_show_comments(4, "sibuk tapi santai")
+        self.todolist_page_show_comments(5, "oh tidak")
 
 class ItemModelTest(TestCase):
 
