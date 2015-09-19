@@ -38,32 +38,6 @@ class HomePageTest(TestCase):
         expected_html = render_to_string('todolist.html')
         self.assertEqual(response.content.decode(), expected_html)
 
-    def test_todolist_page_can_save_a_POST_request(self):
-        request = HttpRequest()
-        request.method = 'POST'
-        request.POST['item_text'] = 'A new list item'
-
-        response = todolist_page(request)
-
-        self.assertEqual(Item.objects.count(), 1)
-        new_item = Item.objects.first()
-        self.assertEqual(new_item.text, 'A new list item')
-
-    def test_todolist_page_redirect_after_POST_request(self):
-        request = HttpRequest()
-        request.method = 'POST'
-        request.POST['item_text'] = 'A new list item'
-
-        response = todolist_page(request)
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], '/todolist/the-only-list-in-the-world/')
-
-    def test_todolist_page_only_saves_items_when_necessary(self):
-        request = HttpRequest()
-        todolist_page(request)
-        self.assertEqual(Item.objects.count(), 0)
-
     def todolist_page_show_comments(self, number, message):
         for x in range(0, number):
             Item.objects.create(text='itemey '+str(number))
@@ -110,3 +84,21 @@ class ListViewTest(TestCase):
 
         self.assertContains(response, 'itemey 1') #2
         self.assertContains(response, 'itemey 2') #3
+
+class NewListTest(TestCase):
+    def test_saving_a_POST_request(self):
+        self.client.post(
+            '/todolist/new',
+            data={'item_text': 'A new list item'}
+        )
+
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, 'A new list item')
+
+    def test_redirects_after_POST(self):
+        response = self.client.post(
+            '/todolist/new',
+            data={'item_text': 'A new list item'}
+        )
+        self.assertRedirects(response, '/todolist/the-only-list-in-the-world/')
