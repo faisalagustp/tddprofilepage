@@ -38,19 +38,6 @@ class HomePageTest(TestCase):
         expected_html = render_to_string('todolist.html')
         self.assertEqual(response.content.decode(), expected_html)
 
-    def todolist_page_show_comments(self, number, message):
-        for x in range(0, number):
-            Item.objects.create(text='itemey '+str(number))
-        request = HttpRequest()
-        response = view_list(request)
-
-        self.assertIn(message, response.content.decode())
-    """
-    def test_todolist_page_shows_comments_no_item(self):
-        self.todolist_page_show_comments(0, "yey, waktunya berlibur")
-        self.todolist_page_show_comments(4, "sibuk tapi santai")
-        self.todolist_page_show_comments(5, "oh tidak")
-    """
 
 class ListAndItemModelsTest(TestCase):
 
@@ -109,6 +96,20 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
         response = self.client.get('/todolist/%d/' % (correct_list.id,))
         self.assertEqual(response.context['list'], correct_list)
+
+    def todolist_page_show_comments(self, number, message):
+        correct_list = List.objects.create()
+        for x in range(0, number):
+            Item.objects.create(text='itemey '+str(number), list=correct_list)
+        response = self.client.get('/todolist/%d/' % (correct_list.id,))
+
+        self.assertIn(message, response.content.decode())
+
+    def test_todolist_page_shows_comments_no_item(self):
+        self.todolist_page_show_comments(0, "yey, waktunya berlibur")
+        self.todolist_page_show_comments(4, "sibuk tapi santai")
+        self.todolist_page_show_comments(5, "oh tidak")
+
 
 class NewListTest(TestCase):
     def test_saving_a_POST_request(self):
