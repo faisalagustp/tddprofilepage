@@ -13,15 +13,7 @@
 {% endblock %}
 
 {% block komentar %}
-    {% with items=list.item_set.all %}
     <div id="komentar">
-      {% if items.count == 0 or items == Null %}
-          yey, waktunya berlibur
-      {% elif items.count < 5 %}
-          sibuk tapi santai
-      {% else %}
-          oh tidak
-      {% endif %}
+      Terdapat {{ list.item_set.all.count }} item : {{ comment }}
     </div>
-    {% endwith %}
 {% endblock %}

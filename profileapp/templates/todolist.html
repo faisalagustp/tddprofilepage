@@ -3,3 +3,13 @@
 {% block header_text %}Start a new To-Do list{% endblock %}
 
 {% block form_action %}/todolist/new{% endblock %}
+
+{% block komentar %} Terdapat {{ items.count }} item dari {{lists.count}} list : {{ comment }} {% endblock %}
+
+{% block lists %}
+  {% for list in lists %}
+    <ul class="pagination">
+      <li><a href="{{list.id}}">{{ list.id }}</a></li>
+    </ul>
+  {% endfor %}
+{% endblock %}
