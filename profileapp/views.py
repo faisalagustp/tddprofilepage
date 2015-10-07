@@ -12,25 +12,35 @@ def activity_page(request):
 def items_to_comment(items):
     items_number = items.count();
     comment = ""
+    boxtype = ""
     if items_number == 0:
         comment = "yey, saatnya berlibur"
+        boxtype = "success"
     elif items_number < 5:
         comment = "sibuk tapi santai"
+        boxtype = "warning"
     else:
         comment = "oh tidak"
+        boxtype = "danger"
 
-    return comment
+    result = [comment,boxtype]
+    return result
 
 def todolist_page(request):
     lists = List.objects.filter()
     items = Item.objects.filter()
-    comment = items_to_comment(items);
-    return render(request, 'todolist.html', {'comment': comment, 'lists' : lists, 'items' : items})
+    result = items_to_comment(items);
+    boxtype = result[1]
+    comment = result[0]
+
+    return render(request, 'todolist.html', {'comment': comment, 'lists' : lists, 'items' : items, 'boxtype' : boxtype })
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
-    comment = items_to_comment(list_.item_set.all())
-    return render(request, 'list.html', {'list': list_ , 'comment': comment})
+    result = items_to_comment(list_.item_set.all())
+    boxtype = result[1]
+    comment = result[0]
+    return render(request, 'list.html', {'list': list_ , 'comment': comment, 'boxtype' : boxtype})
 
 def new_list(request):
     list_ = List.objects.create()

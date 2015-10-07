@@ -152,7 +152,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def test_layout_and_styling(self):
         # Edith goes to the home page
         self.browser.get(self.live_server_url+'/todolist')
-        self.browser.set_window_size(1024, 768)
+        self.browser.set_window_size(1024, 500)
 
         # She notices the input box is nicely centered
         inputbox = self.browser.find_element_by_id('id_new_item')
@@ -169,5 +169,18 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
             512,
+            delta=5
+        )
+
+        # She lookup the footer and find footer section
+        # attached at the bottom
+        footer = self.browser.find_element_by_id('footer');
+        print(footer.location);
+        print(footer.size);
+        print(self.browser.get_window_size());
+
+        self.assertAlmostEqual(
+            footer.location['y'] + footer.size['height'],
+            self.browser.get_window_size()['height'] - 79,
             delta=5
         )

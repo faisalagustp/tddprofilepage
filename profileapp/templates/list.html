@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block komentar %}
-    <div id="komentar">
+    <div id="komentar" class="alert alert-{{ boxtype }}" role="alert">
       Terdapat {{ list.item_set.all.count }} item : {{ comment }}
     </div>
 {% endblock %}

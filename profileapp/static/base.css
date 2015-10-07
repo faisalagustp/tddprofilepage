@@ -1,3 +1,37 @@
 #id_new_item {
     margin-top: 2ex;
 }
+
+body{
+  background-image: url("background.jpg");
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #111;
+  opacity: 0.90;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+  text-align: center;
+  color: white;
+}
+
+.table{
+  background-color: white;
+  opacity : 0.9;
+}

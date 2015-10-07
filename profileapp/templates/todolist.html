@@ -4,7 +4,11 @@
 
 {% block form_action %}/todolist/new{% endblock %}
 
-{% block komentar %} Terdapat {{ items.count }} item dari {{lists.count}} list : {{ comment }} {% endblock %}
+{% block komentar %}
+<div id="komentar" class="alert alert-{{ boxtype }}" role="alert">
+  Terdapat {{ items.count }} item dari {{lists.count}} list : {{ comment }}
+</div>
+{% endblock %}
 
 {% block lists %}
   {% for list in lists %}

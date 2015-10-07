@@ -32,12 +32,6 @@ class HomePageTest(TestCase):
         found = resolve('/todolist/')
         self.assertEqual(found.func, todolist_page)
 
-    def test_todolist_page_returns_correct_html(self):
-        request = HttpRequest()
-        response = todolist_page(request)
-        expected_html = render_to_string('todolist.html')
-        self.assertEqual(response.content.decode(), expected_html)
-
 
 class ListAndItemModelsTest(TestCase):
 
@@ -106,10 +100,10 @@ class ListViewTest(TestCase):
         self.assertIn(message, response.content.decode())
 
     def test_todolist_page_shows_comments_no_item(self):
-        self.todolist_page_show_comments(0, "yey, waktunya berlibur")
+        self.todolist_page_show_comments(0, "yey, saatnya berlibur")
         self.todolist_page_show_comments(4, "sibuk tapi santai")
         self.todolist_page_show_comments(5, "oh tidak")
-
+    
 
 class NewListTest(TestCase):
     def test_saving_a_POST_request(self):
