@@ -172,13 +172,21 @@ class NewVisitorTest(StaticLiveServerTestCase):
             delta=5
         )
 
+    def test_footer_styling(self):
+        # Edith goes to the home page
+        self.browser.get(self.live_server_url+'/todolist')
+        self.browser.set_window_size(1024, 1000)
+
         # She lookup the footer and find footer section
         # attached at the bottom
         footer = self.browser.find_element_by_id('footer');
+        body =  self.browser.find_element_by_tag_name("body");
+        """
+        print(body.location);
         print(footer.location);
-        print(footer.size);
+        print(footer.location);
         print(self.browser.get_window_size());
-
+        """
         self.assertAlmostEqual(
             footer.location['y'] + footer.size['height'],
             self.browser.get_window_size()['height'] - 79,
