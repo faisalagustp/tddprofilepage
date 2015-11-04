@@ -1,11 +1,52 @@
-<html>
-    <head>
-        <title>Web Profile Faisal</title>
-    </head>
-    <body>
-      <h1>Aktivitas Faisal</h1>
+{% extends 'superbase.html' %}
 
-      <h2>Research</h2>
+{% block content %}
+    <div class="container">
+      <div class="col-md-2"></div>
+      <div class="container-home col-md-8">
+      <h1>Profile Faisal</h1>
+
+      <h2>Identitas Diri</h2>
+      <table class="table">
+        <tr>
+          <th>Nama</th>
+          <td>:</td>
+          <td>Faisal Agus Tri Putra</td>
+        </tr>
+        <tr>
+          <th>Tempat Tanggal Lahir</th>
+          <td>:</td>
+          <td>17 Agustus 1994</td>
+        </tr>
+        <tr>
+          <th>Alamat</th>
+          <td>:</td>
+          <td>Jl. Cinta No 41 Pondok Cina, Beji, Depok</td>
+        </tr>
+        <tr>
+          <th>Pendidikan Terakhir</th>
+          <td>:</td>
+          <td>S1 Pendidikan Ilmu Komputer UPI (Lulus: 2014)</td>
+        </tr>
+        <tr>
+          <th>Aktivitas Saat Ini</th>
+          <td>:</td>
+          <td>Mahasiswa Program Magister Ilmu Komputer UI (Intake Februari 2015)</td>
+        </tr>
+        <tr>
+          <th>Kontak</th>
+          <td>:</td>
+          <td>
+            <a href="https://www.facebook.com/faisal.atp">Facebook</a>
+            <a href="https://www.twitter.com/faisalagustp">Twitter</a>
+            <a href="https://www.github.com/faisalagustp">Github</a>
+          </td>
+        </tr>
+      </table>
+
+      <h2>Aktivitas Terdahulu</h2>
+
+      <h3>Research</h3>
       <ul>
         <li>
           Saresehan Tani Online, Sarana Belajar Petani dengan Memanfaatkan Learning Management System dan optimalisasi peran Pusat Kegiatan Belajar Masyarakat/PKBM. <br/>
@@ -18,7 +59,7 @@
         </li>
       </ul>
 
-      <h2>Work</h2>
+      <h3>Work</h3>
       <ul>
         <li>Web Developer di NoLimit Indonesia (2014-2015)<br/>
           Bertanggungjawab dalam pengembangan produk-produk berbasis web oleh NoLimit, startup dalam bidang analisis media sosial.
@@ -33,6 +74,7 @@
             Merancang, mengoordinasi, dan melaksanakan kegiatan praktikum sebagai kegiatan pendukung perkuliahan bersama dengan dosen pengampu pada mata kuliah Basis Data (Semester Ganjil 2011/2012), Sistem Basis Data (Semester Genap 2011/2012) dan Pemrograman Berorientasi Objek (Semester Genap 2012/2013).
         </li>
       </ul>
-      <a href="/">  << Home </a>
-      </body>
-</html>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+{% endblock %}
