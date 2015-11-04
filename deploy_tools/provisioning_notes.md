@@ -29,8 +29,22 @@ Assume we have a user account at /home/username
 
 /home/username
 └── sites
-    └── SITENAME
-         ├── database
-         ├── source
-         ├── static
-         └── virtualenv
+  └── SITENAME
+    ├── database
+    ├── source
+    ├── static
+    └── virtualenv
+
+##Creating nginx config file using magic
+    sed "s/SITENAME/pmpl-faisal.cloudapp.net/g" \
+        deploy_tools/nginx.template.conf | sudo tee \
+        /etc/nginx/sites-available/pmpl-faisal.cloudapp.net
+
+##activating file
+    sudo ln -s ../sites-available/pmpl-faisal.cloudapp.net \
+    /etc/nginx/sites-enabled/pmpl-faisal.cloudapp.net
+
+##upstart using sed
+    sed "s/SITENAME/pmpl-faisal.cloudapp.net/g" \
+        deploy_tools/gunicorn-upstart.template.conf | sudo tee \
+        /etc/init/gunicorn-pmpl-faisal.cloudapp.net.conf
