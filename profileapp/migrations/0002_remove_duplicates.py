@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 
 def find_dupes(apps, schema_editor):
-    List = apps.get_model("lists", "List")
+    List = apps.get_model("profileapp", "List")
     for list_ in List.objects.all():
         items = list_.item_set.all()
         texts = set()
